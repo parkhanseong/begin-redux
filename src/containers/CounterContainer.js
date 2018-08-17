@@ -8,18 +8,30 @@ class CounterContainer extends Component {
     this.props.increment_xx();
   }
 
+  handleDoubleIncre = () => {
+      this.props.doubleIncre();
+  }
   handleDecrement_a = () => {
-    this.props.decrement_xx();
+      this.props.decrement_xx();
+    }
+  handleDoubleDecre = () => {
+    this.props.doubleDecre();
+  }
+  handleZero = () => {
+    this.props.zero();
   }
 
   render() {
-    const { handleIncrement_a, handleDecrement_a } = this;
+    const { handleIncrement_a, handleDecrement_a, handleDoubleIncre, handleDoubleDecre, handleZero } = this;
     const { number } = this.props;
 
     return (
       <Counter 
         onIncrement={handleIncrement_a}
+        onDoubleIncrement={handleDoubleIncre}
         onDecrement={handleDecrement_a}
+        onDoubleDecrement={handleDoubleDecre}
+        onZero={handleZero}
         number={number}
       />
     );
@@ -34,7 +46,10 @@ const mapStateToProps = (state) => ({
 // props 값으로 넣어 줄 액션 함수들을 정의해줍니다
 const mapDispatchToProps = (dispatch) => ({
   increment_xx: () => dispatch(counterActions.increment_()),
-  decrement_xx: () => dispatch(counterActions.decrement_())
+  doubleIncre: () => dispatch(counterActions.double_incre()),
+  decrement_xx: () => dispatch(counterActions.decrement_()),
+  doubleDecre: () => dispatch(counterActions.double_decre()),
+  zero: () => dispatch(counterActions.zero())
 })
 
 // 컴포넌트를 리덕스와 연동 할 떄에는 connect 를 사용합니다.
